@@ -1,26 +1,36 @@
 <template>
-  <div id="app">
-    {{ res }}
-  </div>
+<div>
+  <select @change="$emit('categorySelected',selectedCategory)" v-model="selectedCategory">
+    <option v-for="category of categories" :key="category" :value="category">
+      {{category}}
+    </option>
+  </select>
+</div><!-- </vue-next-select> -->
+    <!-- <ul id="headlines">
+      <li v-for="headline in headlines" :key="headline.publishedAt">
+         <ArticleCard :data="headline"/>
+      </li>
+    </ul> -->
 </template>
 
 <script>
+import ArticleCard from '@/components/ArticleCard.vue'
+
 export default {
   name: 'HeadLines',
+  components: {
+    ArticleCard
+  },
   data () {
     return {
-      res: ""
+      res: "",
+      headlines: [],
+      selectedCategory: null,
+      categories:["business", "entertainment", "general", "health", "science", "sports", "technology"]
     }
-
   },
-  mounted () {
-      this.axios
-      .get('https://newsapi.org/v2/top-headlines?country=us&apiKey=ae6f258d84454d539b607b748ff820bc')
-      .then(response => { this.res = response })
-  },
-  methods () {
 
-  }
+  emits:["categorySelected"]
 
 }
 </script>

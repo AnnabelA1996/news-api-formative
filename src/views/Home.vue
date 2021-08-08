@@ -1,20 +1,31 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <HeadLines/>
+    <!-- <HeadLines/> -->
   </div>
+  <h2>Browse Categories</h2>
+    <HeadLines @category-selected="category=$event"/>
+      <div class="browse-articles">
+        <Categories :category="category"/>
+      </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import HeadLines from '@/components/HeadLines.vue'
+import Categories from '@/components/CategorisedArticles.vue'
 
 export default {
   name: 'Home',
   components: {
     HelloWorld,
-    HeadLines
+    HeadLines,
+    Categories
+  },
+  data(){
+    return{
+      category:null,
+    }
   }
 }
 </script>
